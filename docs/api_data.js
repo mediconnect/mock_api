@@ -1,20 +1,20 @@
 define({ "api": [
   {
-    "type": "get",
-    "url": "/hospitals/:query",
-    "title": "医院搜索列表",
-    "name": "______",
-    "group": "Hospital",
-    "description": "<p>根据搜索词显示医院列表</p>",
+    "type": "GET",
+    "url": "/customer/:id",
+    "title": "Request Customer Info",
+    "name": "CustomerInfo",
+    "description": "<p>Request customer information.</p>",
+    "group": "Customer",
     "parameter": {
       "fields": {
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Srtring",
+            "type": "UUID",
             "optional": false,
-            "field": "query",
-            "description": "<p>搜索词（模拟api中只有center、clinic两词有效）</p>"
+            "field": "id",
+            "description": "<p>Mandatory unique Customer ID.</p>"
           }
         ]
       }
@@ -24,51 +24,567 @@ define({ "api": [
         "Success 200": [
           {
             "group": "Success 200",
-            "type": "Object[]",
+            "type": "Object",
+            "optional": false,
+            "field": "customer",
+            "description": "<p>Customer Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "customer.address",
+            "description": "<p>Mandatory Customer address.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "customer.age",
+            "description": "<p>Optional Customer age.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "customer.email",
+            "description": "<p>Mandatory Customer email.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "customer.name",
+            "description": "<p>Cusomter name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "customer.telephone",
+            "description": "<p>Phone number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "customer.wechat",
+            "description": "<p>Wechat number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "customer.qq",
+            "description": "<p>QQ number.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "customer.gender",
+            "description": "<p>Optional Customer gender.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "CustomerNotFound",
+            "description": "<p>The <code>id</code> of the customer was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/customer.py",
+    "groupTitle": "Customer"
+  },
+  {
+    "type": "GET",
+    "url": "/disease/:id",
+    "title": "Request Disease Information",
+    "name": "DiseaseInfo",
+    "description": "<p>Request disease information</p>",
+    "group": "Disease",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Disease unique ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "disease",
+            "description": "<p>Disease Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "disease.name",
+            "description": "<p>Disease name</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "DiseaseNotFound",
+            "description": "<p>The <code>id</code> of the Disease was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/disease.py",
+    "groupTitle": "Disease"
+  },
+  {
+    "type": "GET",
+    "url": "/document/:id",
+    "title": "Request Document Info",
+    "name": "DocumentInfo",
+    "description": "<p>Request document information.</p>",
+    "group": "Document",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Document unique Id</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "document",
+            "description": "<p>Document Object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Stinrg",
+            "optional": false,
+            "field": "document.description",
+            "description": "<p>Document description</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "document.name",
+            "description": "<p>Document name</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "DocumentNotFound",
+            "description": "<p>The <code>id</code> of the document doesn't exist.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/document.py",
+    "groupTitle": "Document"
+  },
+  {
+    "type": "GET",
+    "url": "/hospital/:id",
+    "title": "Request Hospital Info",
+    "name": "HospitalInfo",
+    "description": "<p>Display information about a hospital.</p>",
+    "group": "Hospital",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Hospital unique ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
             "optional": false,
             "field": "hospital",
-            "description": "<p>医院列表</p>"
+            "description": "<p>Hospital Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospital.address",
+            "description": "<p>Hospital Location.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "hospital.url",
+            "description": "<p>Hospital Website Link.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "hospital.name",
-            "description": "<p>医院名</p>"
-          },
+            "description": "<p>Hospital Name.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
           {
-            "group": "Success 200",
-            "type": "String",
+            "group": "Error 4xx",
+            "type": "ErrorType",
             "optional": false,
-            "field": "hospital.summary",
-            "description": "<p>医院简介</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "hospital.rank",
-            "description": "<p>医院排名</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "Number",
-            "optional": false,
-            "field": "hospital.price",
-            "description": "<p>预约和咨询费用</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "hospital.avail",
-            "description": "<p>最近可约时间</p>"
+            "field": "ObjectNotFound",
+            "description": "<p>The <code>id</code> of the Hospital was not found.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
-    "filename": "api/hospital.py",
+    "filename": "build/hospital.py",
     "groupTitle": "Hospital"
+  },
+  {
+    "type": "GET",
+    "url": "customer/patient/:id",
+    "title": "Request patient info",
+    "name": "PatientInfo",
+    "description": "<p>Request patient information.</p>",
+    "group": "Patient",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique Patient ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "patient",
+            "description": "<p>Patient Object.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "patient.birthdate",
+            "description": "<p>Mandatory birthdate.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patient.name",
+            "description": "<p>Patient name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patient.pinyin",
+            "description": "<p>Patient pinyin.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": true,
+            "field": "patient.gender",
+            "description": "<p>Gender</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patient.relationship",
+            "description": "<p>Relationship with customer</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "patient.passport",
+            "description": "<p>Passport number</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "PatientNotFound",
+            "description": "<p>The <code>id</code> of patient is not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/patient.py",
+    "groupTitle": "Patient"
+  },
+  {
+    "type": "GET",
+    "url": "/reservation/:id",
+    "title": "Reservation info",
+    "name": "GetReservationInfo",
+    "description": "<p>Request reservation information.</p>",
+    "group": "Reservation",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique Reservaiton ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "reservation",
+            "description": "<p>Reservation Object</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.commit_at",
+            "description": "<p>Time of submission.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "DateTime",
+            "optional": false,
+            "field": "reservation.ctime",
+            "description": "<p>Time of creation.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "reservation.disease_id",
+            "description": "<p>Unique ID for disease.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.first_doctor_contact",
+            "description": "<p>Diagnose-doctor contact info.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.first_doctor_name",
+            "description": "<p>Diagnose-doctor name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.first_hospital",
+            "description": "<p>Diagnose-hospital name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservation.hospital_id",
+            "description": "<p>Unique ID for hospital.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "reservation.note",
+            "description": "<p>Note for the reservation.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservation.patient_id",
+            "description": "<p>Unique ID for patient.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservation.res_id",
+            "description": "<p>Reservation ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservation.timeslot_id",
+            "description": "<p>ID for reservation slot.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID",
+            "optional": false,
+            "field": "reservation.customer_id",
+            "description": "<p>Unique ID for customer.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "UUID[]",
+            "optional": false,
+            "field": "reservation.documents",
+            "description": "<p>A list of Unique IDs for documents.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "ReservationNotFound",
+            "description": "<p>The <code>id</code> of the required reservation doesn't exist.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/reservations.py",
+    "groupTitle": "Reservation"
+  },
+  {
+    "type": "GET",
+    "url": "/slot/:id",
+    "title": "Request Slot Information",
+    "name": "SlotInfo",
+    "description": "<p>Display information about a slot.</p>",
+    "group": "Slot",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Mandatory unique slot ID.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "week_start",
+            "description": "<p>time of week starts</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "week_end",
+            "description": "<p>time of week ends</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "type": "ErrorType",
+            "optional": false,
+            "field": "SlotNotFound",
+            "description": "<p>The id of the Slot was not found.</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "build/slot.py",
+    "groupTitle": "Slot"
   }
 ] });
