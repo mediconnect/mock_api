@@ -31,8 +31,8 @@ time_slot_data = {
 	"week":"2"
 }
 
-with open('reservation.json','w') as out:
-	out.write(json.dumps(res_data))
+with open('reservation.json','w',encoding='utf-8') as out:
+	out.write(json.dumps(res_data,ensure_ascii=False))
 
 with open('disease.json','w') as out:
 	out.write(json.dumps(disease_data))
