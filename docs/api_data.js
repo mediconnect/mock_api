@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "GET",
-    "url": "/customer/:id",
+    "url": "/customer/:id/info",
     "title": "Request Customer Info",
     "name": "CustomerInfo",
     "description": "<p>Request customer information.</p>",
