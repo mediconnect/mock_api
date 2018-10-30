@@ -228,7 +228,7 @@
   },
   {
     "type": "GET",
-    "url": "/hospital/:id/info",
+    "url": "/hospital/:id",
     "title": "Request Hospital Info",
     "name": "HospitalInfo",
     "description": "<p>Display information about a hospital.</p>",
@@ -390,32 +390,8 @@
     "groupTitle": "Patient"
   },
   {
-    "type": "POST",
-    "url": "/reservation/:id/commit",
-    "title": "Submit reservation information",
-    "name": "CommitReservation",
-    "description": "<p>Store the created reservation in the database.</p>",
-    "group": "Reservation",
-    "error": {
-      "fields": {
-        "Error 4xx": [
-          {
-            "group": "Error 4xx",
-            "type": "ErrorType",
-            "optional": false,
-            "field": "ReservationExpired",
-            "description": "<p>The slots reserved expired after 30 min.</p>"
-          }
-        ]
-      }
-    },
-    "version": "0.0.0",
-    "filename": "build/reservations.py",
-    "groupTitle": "Reservation"
-  },
-  {
     "type": "GET",
-    "url": "/reservation/:id/info",
+    "url": "/reservation/:id",
     "title": "Reservation info",
     "name": "GetReservationInfo",
     "description": "<p>Request reservation information.</p>",
