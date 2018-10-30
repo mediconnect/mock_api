@@ -1,7 +1,7 @@
 define({ "api": [
   {
     "type": "GET",
-    "url": "/customer/:id",
+    "url": "/customer/:id/info",
     "title": "Request Customer Info",
     "name": "CustomerInfo",
     "description": "<p>Request customer information.</p>",
@@ -299,7 +299,7 @@ define({ "api": [
   },
   {
     "type": "GET",
-    "url": "customer/patient/:id",
+    "url": "customer/:customer_id/patient/:patient_id",
     "title": "Request patient info",
     "name": "PatientInfo",
     "description": "<p>Request patient information.</p>",
@@ -311,8 +311,15 @@ define({ "api": [
             "group": "Parameter",
             "type": "UUID",
             "optional": false,
-            "field": "id",
+            "field": "patient_id",
             "description": "<p>Mandatory unique Patient ID.</p>"
+          },
+	  {
+            "group": "Parameter",
+            "type": "UUID",
+            "optional": false,
+            "field": "customer_id",
+            "description": "<p>Mandatory unique Customer ID.</p>"
           }
         ]
       }
@@ -493,7 +500,7 @@ define({ "api": [
             "group": "Success 200",
             "type": "UUID",
             "optional": false,
-            "field": "reservation.timeslot_id",
+            "field": "reservation.slot_id",
             "description": "<p>ID for reservation slot.</p>"
           },
           {
